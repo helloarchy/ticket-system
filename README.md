@@ -2,10 +2,12 @@
 A ticketing system using microservices.
 
 ## Tech Stack
+* Next.js
 * Typescript
 * Node.js
 * MongoDB
-* SQL
+* Redis
+* NATS Streaming Server
 * Docker
 * Kubernetes
 * Azure
@@ -36,4 +38,10 @@ pay for.
 Handle all user payments via credit cards and the Stripe API. Cancel orders if payment fails, or complete 
 if successful.
 
+## Architecture
+Client frontend, with a microservice backend. A shared common library is imported into all microservices
+as an NPM package. Each service uses Node.js, written in TypeScript. Each has a mongo database, apart 
+from the Expiration service which makes use of Redis. Each service also uses a NATS streaming server
+for event handling and communication. All services are containerised, and hosted via Kubernetes on Azure 
+using AKS.
 
