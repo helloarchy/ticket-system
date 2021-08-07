@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node-dev src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +14,8 @@
     "express": "^4.17.1",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "tslint": "^6.1.3"
   }
 }
