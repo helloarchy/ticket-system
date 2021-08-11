@@ -1,12 +1,10 @@
 import {ValidationError} from "express-validator";
 
 export class DatabaseConnectionError extends Error {
-    public errors: ValidationError[]
+    public reason: string = "Error connecting to database";
 
-    constructor(errors: ValidationError[]) {
+    constructor() {
         super();
-
-        this.errors = errors;
 
         // Extending built in class
         Object.setPrototypeOf(this, DatabaseConnectionError.prototype);
