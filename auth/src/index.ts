@@ -13,7 +13,7 @@ import { errorHandler } from "./middleware/error-handler";
 import { NotFoundError } from "./errors/not-found-error";
 
 const app = express();
-app.set("trust-proxy", true);
+app.set("trust proxy", true);
 app.use(json());
 app.use(
   cookieSession({
@@ -35,6 +35,11 @@ app.all("*", async () => {
 app.use(errorHandler);
 
 const start = async () => {
+  // Check env vars
+  if (!process.env.JWT_KEY) {
+    throw new Error("JWT_KEY is not defined in env");
+  }
+
   try {
     await mongoose.connect("mongodb://auth-mongo-srv:27017/auth", {
       useNewUrlParser: true,
