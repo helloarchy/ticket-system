@@ -2,6 +2,8 @@ import { body, validationResult } from 'express-validator';
 import express, { Request, Response } from 'express';
 import { RequestValidationError } from '../errors/request-validation-error';
 
+import { validateRequest } from '../middleware/validate-request';
+
 const router = express.Router();
 
 router.post(
@@ -10,12 +12,8 @@ router.post(
     body('email').isEmail().withMessage('Email must be valid'),
     body('password').trim().notEmpty().withMessage('You must provide a password'),
   ],
-  (req: Request, res: Response) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      throw new RequestValidationError(errors.array());
-    }
-  }
+  validateRequest,
+  (req: Request, res: Response) => {}
 );
 
 export { router as signInRouter };
