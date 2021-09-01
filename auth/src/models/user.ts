@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { Password } from "../services/password";
+import mongoose from 'mongoose';
+import { Password } from '../services/password';
 
 // Define new User properties
 interface UserAttrs {
@@ -42,10 +42,10 @@ const userSchema = new mongoose.Schema(
 );
 
 // Run before saving
-userSchema.pre("save", async function (done) {
-  if (this.isModified("password")) {
-    const hashed = await Password.toHash(this.get("password"));
-    this.set("password", hashed);
+userSchema.pre('save', async function (done) {
+  if (this.isModified('password')) {
+    const hashed = await Password.toHash(this.get('password'));
+    this.set('password', hashed);
   }
   done();
 });
@@ -54,6 +54,6 @@ userSchema.statics.build = (attrs: UserAttrs) => {
   return new User(attrs);
 };
 
-const User = mongoose.model<UserDoc, UserModel>("User", userSchema);
+const User = mongoose.model<UserDoc, UserModel>('User', userSchema);
 
 export { User };
