@@ -1,7 +1,7 @@
 import { CustomError } from './custom-error';
 
 export class BadRequestError extends CustomError {
-  public statusCode: number = 400;
+  public statusCode = 400;
   public message: string;
 
   constructor(message: string) {
